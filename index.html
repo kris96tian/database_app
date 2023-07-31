@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fahrraddiebstahl in Berlin - Visualisation</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f7f7f7;
+        color: #333;
+    }
+
+    h1 {
+        text-align: center;
+        color: #0080ff;
+        font-size: 32px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+
+    form label {
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    form input[type="date"],
+    form input[type="text"],
+    form input[type="number"] {
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #f2f2f2;
+        margin-bottom: 12px;
+        width: 100%;
+        font-size: 14px;
+        color: #333;
+    }
+
+    form input[type="submit"] {
+        background-color: #0080ff;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        font-size: 16px;
+    }
+
+    form input[type="submit"]:hover {
+        background-color: #0059b3;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #0080ff;
+        color: white;
+    }
+
+    h2 {
+        margin-top: 30px;
+        color: #0080ff;
+        font-size: 24px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+</style>
+
+</head>
+<body>
+    <h1>Fahrraddiebstahl Visualization</h1>
+
+    <form action="/filter" method="POST">
+        <label for="start_datum">Start Datum eingeben:</label>
+        <input type="date" id="start_datum" name="start_datum">
+
+        <label for="end_datum">End Datum eingeben:</label>
+        <input type="date" id="end_datum" name="end_datum">
+
+        <input type="submit" value="Filtern nach Zeitraum">
+    </form>
+
+    <form action="/filter" method="POST">
+        <label for="delikt">Delikt eingeben:</label>
+        <input type="text" id="delikt" name="delikt">
+
+        <input type="submit" value="Filtern nach Delikt">
+    </form>
+
+    <form action="/filter" method="POST">
+        <label for="schadenshoehe_min">Min. Schadenshoehe eingeben:</label>
+        <input type="number" id="schadenshoehe_min" name="schadenshoehe_min">
+
+        <input type="submit" value="Filtern nach Schadenshöhe">
+    </form>
+
+    <form action="/plot" method="GET">
+        <input type="submit" value="Plot der Diebstähle in Berlin">
+    </form>
+
+    <form action="/histogram" method="GET">
+        <input type="submit" value="Histogramm der Diebstähle nach Tatzeit">
+    </form>
+
+    <br>
+
+    {% if data1 %}
+    <h2>Filtered Data 1:</h2>
+    <table>
+        <tr>
+            <th>ANGELEGT_AM</th>
+            <th>TATZEIT_ANFANG</th>
+            <th>TATZEIT_ENDE</th>
+            <th>LOR</th>
+        </tr>
+        {% for row in data1 %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if data2 %}
+    <h2>Filtered Data 2:</h2>
+    <table>
+        <tr>
+            <th>ANGELEGT_AM</th>
+            <th>TATZEIT_ANFANG</th>
+            <th>TATZEIT_ENDE</th>
+            <th>LOR</th>
+        </tr>
+        {% for row in data2 %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if data3 %}
+    <h2>Filtered Data 3:</h2>
+    <table>
+        <tr>
+            <th>ANGELEGT_AM</th>
+            <th>TATZEIT_ANFANG</th>
+            <th>TATZEIT_ENDE</th>
+            <th>LOR</th>
+        </tr>
+        {% for row in data3 %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
