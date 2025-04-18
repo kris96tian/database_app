@@ -1,4 +1,4 @@
-# Fahrrad Diebstahl Analyse App
+# CycleWatch Berlin - (PostgreSQL-powered)
 
 Diese App wurde entwickelt, um Daten über Fahrraddiebstähle in Berlin anzuzeigen und zu analysieren. Sie basiert auf dem Flask-Framework und verwendet PostgreSQL als Datenbank, um die Fahrraddiebstahldaten lokal zu speichern.
 
